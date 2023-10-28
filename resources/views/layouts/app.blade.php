@@ -26,15 +26,19 @@
     <link href="{{ asset('assets/vendor/quill/quill.snow.') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/quill/quill.bubble.') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/simple-datatables/style.') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-    <!-- SweetAlert -->
-    <link rel="stylesheet" href="{{ asset('css/sweetalert2.css') }}">
-    <script src="{{ asset('js/sweetalert2.js') }}"></script>
+    {{-- <!-- SweetAlert -->--}}
+    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.css') }}">
+    <script src="{{ asset('assets/js/sweetalert2.js') }}"></script> 
 
+    <link rel="stylesheet" href="{{asset('assets/css/datatables.css')}}">
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.js')}}"></script>
+
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 
 </head>
 
@@ -129,20 +133,28 @@
             <li class="nav-heading">Pages</li>
 
             @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="">
+                    <i class="bi bi-briefcase"></i>
+                    <span>Usuarios</span>
+                </a>
+            </li>
+
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
+                    <a class="nav-link collapsed" href="{{route('programas')}}">
                         <i class="bi bi-bookmarks"></i>
-                        <span>Categorias</span>
+                        <span>Programas</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="">
-                        <i class="bi bi-briefcase"></i>
-                        <span>Proyectos</span>
+                        <i class="bi bi-bookmarks"></i>
+                        <span>Cursos</span>
                     </a>
                 </li>
-                
+
             @elseif (Auth::user()->hasRole('PROFESORL'))
 
 
@@ -179,14 +191,12 @@
     <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/quill/quill.min.js ') }}"></script>
-    <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-
+    <script src="{{asset('assets/js/app.js')}}"></script>
 </body>
 
 </html>

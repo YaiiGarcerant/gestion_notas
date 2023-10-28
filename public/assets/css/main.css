@@ -1,0 +1,14 @@
+.color{
+    color: #192655;
+    font-size: 22px !important;
+}
+
+.btn-general{
+    background-color: #3876BF;
+    color: white;
+}
+
+.btn-general:hover{
+    background-color: #192655;
+    color: white;
+}

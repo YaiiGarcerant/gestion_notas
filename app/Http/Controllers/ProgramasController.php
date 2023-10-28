@@ -7,59 +7,45 @@ use Illuminate\Http\Request;
 
 class ProgramasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $programas = Programas::all();
+        return view('programa.index', compact('programas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        request()->validate(Programas::$rules);
+        $programas = Programas::where('nombre', $request->nombre)->first();
+        if (!$programas) {
+           $programas = Programas::create($request->all());
+           return redirect()->route('programas')->with('success', 'Programa Creado Exitosamente');
+        }else{
+            return redirect()->route('programas')->with('error', 'El programa Ya Existe');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Programas $programas)
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate(Programas::$rules);
+
+        $programas = Programas::where('nombre', $request->nombre)->first();
+        if (!$programas) {
+            $programas = Programas::where('id', $id)
+            ->update([
+                'nombre' => $request->nombre,
+            ]);
+           return redirect()->route('programas')->with('success', 'Programa Creado Exitosamente');
+        }else{
+            return redirect()->route('programas')->with('error', 'Este programa ya existe');
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Programas $programas)
+    public function destroy($id)
     {
-        //
-    }
+        $programas = Programas::where('id', $id)->delete();
+        return redirect()->route('programas')->with('success', 'Programa Eliminado Exitosamente');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Programas $programas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Programas $programas)
-    {
-        //
     }
 }

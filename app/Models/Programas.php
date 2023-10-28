@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Programas extends Model
 {
     use HasFactory;
+
+    static $rules = [
+        'nombre' => 'required|string', 
+    ];
+
+    protected $fillable = [
+        'nombre',
+    ];
 }

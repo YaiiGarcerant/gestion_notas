@@ -20,3 +20,38 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTES PROGRAMAS 
+|--------------------------------------------------------------------------
+*/
+
+Route::get('programas', [App\Http\Controllers\ProgramasController::class, 'index'])->name('programas')->middleware('auth');
+
+Route::post('programas/create', [App\Http\Controllers\ProgramasController::class, 'store'])->name('programas.create');
+
+Route::post('programas/update/{id}', [App\Http\Controllers\ProgramasController::class, 'update'])->name('programas.update');
+
+
+Route::get('/programas/destroy/{id}', [App\Http\Controllers\ProgramasController::class, 'destroy'])->name('programas.destroy');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

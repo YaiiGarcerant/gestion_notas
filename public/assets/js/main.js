@@ -1,12 +1,32 @@
-/**
-* Template Name: NiceAdmin
-* Updated: Aug 30 2023 with Bootstrap v5.3.1
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-function mayuscula(e) {
-    e.value = e.value.toUpperCase();
+
+const inputs = document.getElementsByTagName('input');
+const mayuscula = function(e){
+  e.value = e.value.toUpperCase();
+}
+
+for(i=1; i<inputs.length; i++){
+  if(inputs[i].getAttribute('type')=='text' && inputs[i].id !== 'password'){
+    let id = inputs[i].getAttribute('id');
+    let input = document.getElementById(id);
+    inputs[i].onkeyup = function(){
+      mayuscula(input);
+    }
+  }
+}
+
+
+
+const deletePrograma = (id)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/programas/destroy/${id}`;
+    }
+  })
 }
 
 
@@ -302,13 +322,6 @@ function mayuscula(e) {
       }, false)
     })
 
-  /**
-   * Initiate Datatables
-   */
-  const datatables = select('.datatable', true)
-  datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable);
-  })
 
   /**
    * Autoresize echart charts
@@ -325,3 +338,7 @@ function mayuscula(e) {
   }
 
 })();
+
+
+
+
