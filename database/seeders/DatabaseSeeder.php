@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -19,5 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'administrador@gmail.com',
             'password' => bcrypt('administradorgeneral'),
         ]);
+
+        $this->call(RoleSeeder::class);
     }
 }

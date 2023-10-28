@@ -74,8 +74,8 @@
                     @guest
                         <!-- @if (Route::has('login'))
     <li class="nav-item">
-                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                  </li>
+                          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                      </li>
     @endif -->
                     @else
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
@@ -128,19 +128,27 @@
 
             <li class="nav-heading">Pages</li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-bookmarks"></i>
-                    <span>Categorias</span>
-                </a>
-            </li> <!--End Profile Page Nav -->
+            @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="">
+                        <i class="bi bi-bookmarks"></i>
+                        <span>Categorias</span>
+                    </a>
+                </li>
 
-         <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-briefcase"></i>
-                    <span>Proyectos</span>
-                </a>
-            </li>    <!--End F.A.Q Page Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="">
+                        <i class="bi bi-briefcase"></i>
+                        <span>Proyectos</span>
+                    </a>
+                </li>
+                
+            @elseif (Auth::user()->hasRole('PROFESORL'))
+
+
+            @elseif (Auth::user()->hasRole('ESTUDIANTE'))
+            @endif
+
 
         </ul>
 
