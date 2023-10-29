@@ -79,7 +79,6 @@ class ProfesorController extends Controller
 
     }
 
-
     public function update(Request $request, $id)
     {
         $request->validate([

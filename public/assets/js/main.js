@@ -15,7 +15,6 @@ for(i=1; i<inputs.length; i++){
 }
 
 
-
 const deletePrograma = (id)=>{
   Swal.fire({
     icon: 'warning',
@@ -56,6 +55,19 @@ const deleteProfesor = (dato)=>{
   })
 }
 
+
+const deleteEstudiante = (dato)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/estudiantes/destroy/${dato}`;
+    }
+  })
+}
 
 
 (function() {

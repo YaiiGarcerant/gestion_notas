@@ -144,7 +144,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('programas') }}">
+                <a class="nav-link collapsed" href="{{ route('estudiantes') }}">
                     <i class="bi bi-mortarboard-fill"></i>
                     <span>Estudiantes</span>
                 </a>

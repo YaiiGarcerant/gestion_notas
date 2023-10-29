@@ -169,3 +169,34 @@ Route::get(
     [App\Http\Controllers\MateriasController::class, 'destroy']
 )
     ->name('materias.destroy');
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE ESTUDIANTES
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'estudiantes',
+    [App\Http\Controllers\EstudianteController::class, 'index']
+)->name('estudiantes')->middleware('auth');
+
+Route::post(
+    'estudiantes/create',
+    [App\Http\Controllers\EstudianteController::class, 'store']
+)
+    ->name('estudiantes.create');
+
+Route::post(
+    'estudiantes/update/{id}',
+    [App\Http\Controllers\EstudianteController::class, 'update']
+)
+    ->name('estudiantes.update');
+
+
+Route::get(
+    '/estudiantes/destroy/{id}',
+    [App\Http\Controllers\EstudianteController::class, 'destroy']
+)
+    ->name('estudiantes.destroy');

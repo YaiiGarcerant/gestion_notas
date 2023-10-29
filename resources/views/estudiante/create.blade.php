@@ -1,20 +1,20 @@
-<div class="modal fade modal-lg" id="createProfesor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade modal-lg" id="createEstudiante" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title fs-5 color fw-2 mt-2" id="modalTitleId">Registrar Profesor <i
+                <h5 class="modal-title fs-5 color fw-2 mt-2" id="modalTitleId">Registrar Estudiante <i
                         class="bi bi-person"></i> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" class="needs-validation" action="{{ route('profesor.create') }}" novalidate
+            <form method="POST" class="needs-validation" action="{{ route('estudiantes.create') }}" novalidate
                 role="form">
                 @csrf
                 <div class="modal-body">
                     <div class="container-fluid row g-3">
 
                         <small class="text-muted fw-semibold mt-4">
-                            Datos Del Profesor
+                            Datos Del Estudiante
                             <hr id="formularioProfesores">
                         </small>
 
@@ -77,17 +77,22 @@
 
 
                         <small class="text-muted fw-semibold mt-4 mb-0">
-                            Datos De La Materia <hr id="formularioProfesores">
+                            Datos Del Curso<hr id="formularioProfesores">
                         </small>
 
                         <div class="col-12 mb-4" style="margin-top: 10px">
-                            <label for="modelo" class="form-label fw-semibold">Materia</label>
-                            <input type="text" class="form-control border-2 shadow-sm" name="nombre" id="nombre"
-                          required>
-                            @if ($errors->has('nombre'))
-                                <small class="text-danger fw-semibold">
+                            <label for="modelo" class="form-label fw-semibold">Curso</label>
+                            <select class="form-select border-2 shadow-sm" id="curso_id" name="curso_id" required>
+                                <option selected disabled value="">Seleccionar Opción...</option>
+                                @foreach ($cursos as $curso)
+                                        <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('curso_id'))
+                                <div class="text-danger fw-medium">
                                     <i class="bi bi-exclamation-circle"></i>
-                                </small>
+                                    Este campo es obligatorio!
+                                </div>
                             @endif
                         </div>
                     </div>
