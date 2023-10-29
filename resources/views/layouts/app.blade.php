@@ -30,15 +30,15 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-    {{-- <!-- SweetAlert -->--}}
+    {{-- <!-- SweetAlert --> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.css') }}">
-    <script src="{{ asset('assets/js/sweetalert2.js') }}"></script> 
+    <script src="{{ asset('assets/js/sweetalert2.js') }}"></script>
 
-    <link rel="stylesheet" href="{{asset('assets/css/datatables.css')}}">
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/js/datatables.js')}}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/datatables.css') }}">
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatables.js') }}"></script>
 
-    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
 </head>
 
@@ -78,8 +78,8 @@
                     @guest
                         <!-- @if (Route::has('login'))
     <li class="nav-item">
-                          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                      </li>
+                                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                              </li>
     @endif -->
                     @else
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
@@ -130,33 +130,40 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">Pages</li>
+            <li class="nav-heading">Paginas</li>
 
             @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
 
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
-                    <i class="bi bi-person"></i>
-                    <span>Usuarios</span>
+                <a class="nav-link collapsed" href="{{ route('profesores') }}">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Profesores</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('programas') }}">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    <span>Estudiantes</span>
                 </a>
             </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{route('programas')}}">
-                        <i class="bi bi-bookmarks"></i>
+                    <a class="nav-link collapsed" href="{{ route('programas') }}">
+                        <i class="bi bi-bookmarks-fill"></i>
                         <span>Programas</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{route('cursos')}}">
-                        <i class="bi bi-bookmarks"></i>
+                    <a class="nav-link collapsed" href="{{ route('cursos') }}">
+                        <i class="bi bi-pen-fill"></i>
                         <span>Cursos</span>
                     </a>
                 </li>
-
             @elseif (Auth::user()->hasRole('PROFESORL'))
-
 
             @elseif (Auth::user()->hasRole('ESTUDIANTE'))
             @endif
@@ -196,7 +203,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <script src="{{asset('assets/js/app.js')}}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>
 
 </html>

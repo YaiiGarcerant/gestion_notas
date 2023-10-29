@@ -43,6 +43,20 @@ const deleteCurso = (id)=>{
 }
 
 
+const deleteProfesor = (dato)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/profesores/destroy/${dato}`;
+    }
+  })
+}
+
+
 
 (function() {
   "use strict";

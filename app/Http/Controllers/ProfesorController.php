@@ -5,61 +5,115 @@ namespace App\Http\Controllers;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\Materias;
+use Illuminate\Support\Facades\DB;
+
 class ProfesorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $profesores = Profesor::all();
+        return view('profesor.index', compact('profesores'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'identificacion' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required',
+            'nombre' => 'required',
+        ]);
+
+        // return response()->json($request);
+    
+
+        $materiaExist = Materias::where('nombre', $request->nombre)->first();
+        if (!$materiaExist) {
+            $userExist = Profesor::where('identificacion', $request->identificacion)->first();
+            if (!$userExist) {
+                
+                $user = \App\Models\User::factory()->create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->identificacion),
+                ]);
+
+                $user->assignRole('PROFESOR');
+
+                // $user = User::where('email', '=', $request->email)->first()->select('users.id');
+                
+                $user = DB::table('users')->where('users.email', '=', $request->email)->first();
+
+                $profesor = Profesor::insert([
+                    'user_id' => $user->id,
+                    'identificacion' => $request->identificacion,
+                    'telefono' => $request->telefono,
+                    'direccion' => $request->direccion,
+                ]);
+
+                $profesor = Profesor::where('identificacion', $request->identificacion)->first();
+
+                $materia = Materias::create([
+                    'nombre' => $request->nombre,
+                    'profesor_id' => $profesor->id,
+                ]);
+
+                return redirect()->route('profesores')->with('success', 'Proceso Finalizado Exitosamente');
+
+            }else{
+
+                return redirect()->route('profesores')->with('error', 'Este Docente Se Encuentra Registrado');
+
+            }
+        }else{
+
+            return redirect()->route('profesores')->with('error', 'Esta Materia Se Encuentra Registrada');
+
+        }
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Profesor $profesor)
+
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'identificacion' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required',
+        ]);
+
+        // $profesor = Profesor::where('id', '=', $id)->first();
+
+        $user = User::where('id' , '=', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->identificacion),
+        ]);
+
+        $search = User::where('email', '=', $request->email )->first();
+
+        $profesor = Profesor::where('user_id', '=', $search->id)->update([
+            'identificacion' => $request->identificacion,
+            'telefono' => $request->telefono,
+            'direccion' => $request->direccion,
+        ]);
+
+        return redirect()->route('profesores')->with('success', 'Proceso Finalizado Exitosamente');
+
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Profesor $profesor)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Profesor $profesor)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Profesor $profesor)
-    {
-        //
+        $user = DB::table('users')->where('id' , $id)->delete();
+        return redirect()->route('profesores')->with('success', 'Proceso Finalizado Exitosamente');
     }
 }

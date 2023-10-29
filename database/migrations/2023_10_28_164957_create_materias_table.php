@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->foreignId('profesor_id')
             ->constrained('profesors')
             ->onUpdate('cascade')

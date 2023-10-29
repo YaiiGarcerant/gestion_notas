@@ -32,16 +32,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get(
     'programas',
     [App\Http\Controllers\ProgramasController::class, 'index']
+)->name('programas')->middleware('auth');
+
+Route::post(
+    'programas/create',
+    [App\Http\Controllers\ProgramasController::class, 'store']
 )
-    ->name('programas')->middleware('auth');
-
-Route::post('programas/create', [App\Http\Controllers\ProgramasController::class, 'store'])->name('programas.create');
-
-Route::post('programas/update/{id}', [App\Http\Controllers\ProgramasController::class, 'update'])->name('programas.update');
-
-
-Route::get('/programas/destroy/{id}', [App\Http\Controllers\ProgramasController::class, 'destroy'])->name('programas.destroy');
-
+    ->name('programas.create');
+Route::post(
+    'programas/update/{id}',
+    [App\Http\Controllers\ProgramasController::class, 'update']
+)
+    ->name('programas.update');
+Route::get(
+    '/programas/destroy/{id}',
+    [App\Http\Controllers\ProgramasController::class, 'destroy']
+)
+    ->name('programas.destroy');
 
 
 /*
@@ -53,15 +60,26 @@ Route::get('/programas/destroy/{id}', [App\Http\Controllers\ProgramasController:
 Route::get(
     'cursos',
     [App\Http\Controllers\CursoController::class, 'index']
+)->name('cursos')->middleware('auth');
+
+Route::post(
+    'cursos/create',
+    [App\Http\Controllers\CursoController::class, 'store']
 )
-    ->name('cursos')->middleware('auth');
+    ->name('cursos.create');
 
-Route::post('cursos/create', [App\Http\Controllers\CursoController::class, 'store'])->name('cursos.create');
+Route::post(
+    'cursos/update/{id}',
+    [App\Http\Controllers\CursoController::class, 'update']
+)
+    ->name('cursos.update');
 
-Route::post('cursos/update/{id}', [App\Http\Controllers\CursoController::class, 'update'])->name('cursos.update');
 
-
-Route::get('/cursos/destroy/{id}', [App\Http\Controllers\CursoController::class, 'destroy'])->name('cursos.destroy');
+Route::get(
+    '/cursos/destroy/{id}',
+    [App\Http\Controllers\CursoController::class, 'destroy']
+)
+    ->name('cursos.destroy');
 
 
 /*
@@ -73,12 +91,81 @@ Route::get('/cursos/destroy/{id}', [App\Http\Controllers\CursoController::class,
 Route::get(
     'materias',
     [App\Http\Controllers\MateriasController::class, 'index']
+)->name('materias')->middleware('auth');
+
+Route::post(
+    'materias/create',
+    [App\Http\Controllers\MateriasController::class, 'store']
 )
-    ->name('materias')->middleware('auth');
+    ->name('materias.create');
 
-Route::post('materias/create', [App\Http\Controllers\MateriasController::class, 'store'])->name('materias.create');
+Route::post(
+    'materias/update/{id}',
+    [App\Http\Controllers\MateriasController::class, 'update']
+)
+    ->name('materias.update');
 
-Route::post('materias/update/{id}', [App\Http\Controllers\MateriasController::class, 'update'])->name('materias.update');
+
+Route::get(
+    '/materias/destroy/{id}',
+    [App\Http\Controllers\MateriasController::class, 'destroy']
+)
+    ->name('materias.destroy');
 
 
-Route::get('/materias/destroy/{id}', [App\Http\Controllers\MateriasController::class, 'destroy'])->name('materias.destroy');
+    /*
+|--------------------------------------------------------------------------
+| ROUTE MATERIA
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'profesores',
+    [App\Http\Controllers\ProfesorController::class, 'index']
+)->name('profesores')->middleware('auth');
+
+Route::post(
+    'profesores/create',
+    [App\Http\Controllers\ProfesorController::class, 'store']
+)
+    ->name('profesor.create');
+
+Route::post(
+    'profesores/update/{id}',
+    [App\Http\Controllers\ProfesorController::class, 'update']
+)->name('profesor.update');
+
+
+Route::get('/profesores/destroy/{id}',  [App\Http\Controllers\ProfesorController::class, 'destroy'])->name('profesor.destroy');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE MATERIA
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'materias',
+    [App\Http\Controllers\MateriasController::class, 'index']
+)->name('materias')->middleware('auth');
+
+Route::post(
+    'materias/create',
+    [App\Http\Controllers\MateriasController::class, 'store']
+)
+    ->name('materias.create');
+
+Route::post(
+    'materias/update/{id}',
+    [App\Http\Controllers\MateriasController::class, 'update']
+)
+    ->name('materias.update');
+
+
+Route::get(
+    '/materias/destroy/{id}',
+    [App\Http\Controllers\MateriasController::class, 'destroy']
+)
+    ->name('materias.destroy');
