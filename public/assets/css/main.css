@@ -1,6 +1,7 @@
 .color{
     color: #192655;
     font-size: 22px !important;
+    margin-top: -20px;
 }
 
 .btn-general{
@@ -12,3 +13,4 @@
     background-color: #192655;
     color: white;
 }
+

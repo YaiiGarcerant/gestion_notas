@@ -1,22 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
-<h4>Dashboard</h4>
-<nav>
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item active">Dashboard</li>
-  </ol>
-</nav>
-</div><!-- End Page Title -->
-
-
     <main class="container">
         <section class="mt-4">
             <article class="card rounded-4 shadow-sm">
                 <div class="card-body p-4">
-                    <h4 class="card-title color fw-semibold" style="margin-top: -20px">Programas</h4>
+                    <h4 class="card-title color fw-semibold">Programas</h4>
                     <!-- Modal trigger button -->
                     <button type="button" class="btn sahdow-sm btn-general btn-sm" data-bs-toggle="modal" data-bs-target="#createprogramas">
                        Registrar<i class="bi bi-bookmark-plus"></i>

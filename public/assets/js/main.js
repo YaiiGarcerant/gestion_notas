@@ -29,6 +29,19 @@ const deletePrograma = (id)=>{
   })
 }
 
+const deleteCurso = (id)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/cursos/destroy/${id}`;
+    }
+  })
+}
+
 
 
 (function() {

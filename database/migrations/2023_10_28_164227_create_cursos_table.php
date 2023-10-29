@@ -18,6 +18,10 @@ return new class extends Migration
             ->constrained('profesors')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->foreignId('programa_id')
+            ->constrained('programas')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

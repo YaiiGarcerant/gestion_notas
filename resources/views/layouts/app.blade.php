@@ -136,7 +136,7 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="">
-                    <i class="bi bi-briefcase"></i>
+                    <i class="bi bi-person"></i>
                     <span>Usuarios</span>
                 </a>
             </li>
@@ -149,7 +149,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
+                    <a class="nav-link collapsed" href="{{route('cursos')}}">
                         <i class="bi bi-bookmarks"></i>
                         <span>Cursos</span>
                     </a>
