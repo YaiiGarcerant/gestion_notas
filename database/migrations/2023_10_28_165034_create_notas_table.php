@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('segunda_nota');
             $table->integer('tercera_nota');
             $table->integer('definitiva');
+            $table->string('observaciones');
             $table->timestamps();
         });
     }

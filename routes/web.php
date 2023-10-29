@@ -82,40 +82,9 @@ Route::get(
     ->name('cursos.destroy');
 
 
-/*
-|--------------------------------------------------------------------------
-| ROUTE MATERIA
-|--------------------------------------------------------------------------
-*/
-
-Route::get(
-    'materias',
-    [App\Http\Controllers\MateriasController::class, 'index']
-)->name('materias')->middleware('auth');
-
-Route::post(
-    'materias/create',
-    [App\Http\Controllers\MateriasController::class, 'store']
-)
-    ->name('materias.create');
-
-Route::post(
-    'materias/update/{id}',
-    [App\Http\Controllers\MateriasController::class, 'update']
-)
-    ->name('materias.update');
-
-
-Route::get(
-    '/materias/destroy/{id}',
-    [App\Http\Controllers\MateriasController::class, 'destroy']
-)
-    ->name('materias.destroy');
-
-
     /*
 |--------------------------------------------------------------------------
-| ROUTE MATERIA
+| ROUTE DOCENTE
 |--------------------------------------------------------------------------
 */
 
@@ -139,36 +108,6 @@ Route::post(
 Route::get('/profesores/destroy/{id}',  [App\Http\Controllers\ProfesorController::class, 'destroy'])->name('profesor.destroy');
 
 
-
-/*
-|--------------------------------------------------------------------------
-| ROUTE MATERIA
-|--------------------------------------------------------------------------
-*/
-
-Route::get(
-    'materias',
-    [App\Http\Controllers\MateriasController::class, 'index']
-)->name('materias')->middleware('auth');
-
-Route::post(
-    'materias/create',
-    [App\Http\Controllers\MateriasController::class, 'store']
-)
-    ->name('materias.create');
-
-Route::post(
-    'materias/update/{id}',
-    [App\Http\Controllers\MateriasController::class, 'update']
-)
-    ->name('materias.update');
-
-
-Route::get(
-    '/materias/destroy/{id}',
-    [App\Http\Controllers\MateriasController::class, 'destroy']
-)
-    ->name('materias.destroy');
 
 
 /*
@@ -200,3 +139,68 @@ Route::get(
     [App\Http\Controllers\EstudianteController::class, 'destroy']
 )
     ->name('estudiantes.destroy');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE MATERIA
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'materias',
+    [App\Http\Controllers\MateriasController::class, 'index']
+)->name('materias')->middleware('auth');
+
+Route::post(
+    'materias/create',
+    [App\Http\Controllers\MateriasController::class, 'store']
+)
+    ->name('materias.create');
+
+Route::post(
+    'materias/update/{id}',
+    [App\Http\Controllers\MateriasController::class, 'update']
+)
+    ->name('materias.update');
+
+
+Route::get(
+    '/materias/destroy/{id}',
+    [App\Http\Controllers\MateriasController::class, 'destroy']
+)
+    ->name('materias.destroy');
+
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE NOTAS
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'notas',
+    [App\Http\Controllers\NotasController::class, 'index']
+)->name('notas')->middleware('auth');
+
+Route::post(
+    'notas/create',
+    [App\Http\Controllers\NotasController::class, 'store']
+)
+    ->name('notas.create');
+
+Route::post(
+    'notas/update/{id}',
+    [App\Http\Controllers\NotasController::class, 'update']
+)
+    ->name('notas.update');
+
+
+Route::get(
+    '/notas/destroy/{id}',
+    [App\Http\Controllers\NotasController::class, 'destroy']
+)
+    ->name('notas.destroy');
+
+

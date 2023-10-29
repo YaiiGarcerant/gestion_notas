@@ -2,64 +2,78 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Notas;
 use Illuminate\Http\Request;
 
+use App\Models\Estudiante;
+use App\Models\Materias;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 class NotasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $notas = Notas::all();
+        $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
+        $estudiantes = DB::table('estudiantes')
+            ->join('users', 'estudiantes.user_id', '=', 'users.id')
+            ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
+            ->where('cursos.profesor_id', '=', $profesor->id)
+            ->select('users.name as estudiante', 'estudiantes.id')
+            ->get();
+        $materias = Materias::where('profesor_id', '=', $profesor->id)->select('materias.id')->get();
+        // $estudiantes = Estudiante::all();
+        // $materias = Materias::all();
+        return view('notas.index', compact('notas', 'estudiantes', 'materias'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        request()->validate(Notas::$rules);
+
+        // return response()->json($request);
+
+        // Acceder a los valores numéricos
+        $primeraNota =  intval($request->primera_nota);
+        $segundaNota = intval( $request->segunda_nota);
+        $terceraNota = intval($request->tercera_nota);
+
+        $definitiva = $primeraNota + $segundaNota + $terceraNota;
+
+        $notas = Notas::insert([
+            'estudiante_id' => $request->estudiante_id,
+            'materia_id' => $request->materia_id,
+            'primera_nota' => $request->primera_nota,
+            'segunda_nota' => $request->segunda_nota ,
+            'tercera_nota'=> $request->tercera_nota,
+            'definitiva' => $definitiva,
+            'observaciones' => $request->observaciones,
+        ]);
+
+        return redirect()->route('notas')->with('success', 'Proceso Finalizado Exitosamente');
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notas $notas)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Notas $notas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Notas $notas)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Notas $notas)
     {
-        //
     }
+
+
+
+
+    public function indexRanking()
+    {
+
+    }
+
 }

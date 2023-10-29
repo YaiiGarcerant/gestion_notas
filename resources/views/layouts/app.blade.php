@@ -77,10 +77,10 @@
 
                     @guest
                         <!-- @if (Route::has('login'))
-    <li class="nav-item">
-                                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                              </li>
-    @endif -->
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @endif -->
                     @else
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                             data-bs-toggle="dropdown">
@@ -92,7 +92,6 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                             <li class="dropdown-header">
                                 <h6> {{ Auth::user()->name }}</h6>
-                                <span>Web Designer</span>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -133,27 +132,18 @@
             <li class="nav-heading">Paginas</li>
 
             @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('profesores') }}">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Profesores</span>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('estudiantes') }}">
-                    <i class="bi bi-mortarboard-fill"></i>
-                    <span>Estudiantes</span>
-                </a>
-            </li>
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('programas') }}">
                         <i class="bi bi-bookmarks-fill"></i>
                         <span>Programas</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('profesores') }}">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Profesores</span>
                     </a>
                 </li>
 
@@ -163,9 +153,43 @@
                         <span>Cursos</span>
                     </a>
                 </li>
-            @elseif (Auth::user()->hasRole('PROFESORL'))
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('materias') }}">
+                        <i class="bi bi-book-half"></i>
+                        <span>Materias</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('estudiantes') }}">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <span>Estudiantes</span>
+                    </a>
+                </li>
+            @elseif (Auth::user()->hasRole('PROFESOR'))
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{route('notas')}}">
+                        <i class="bi bi-stickies-fill"></i>
+                        <span>Notas</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                        <span>Ranking</span>
+                    </a>
+                </li>
 
             @elseif (Auth::user()->hasRole('ESTUDIANTE'))
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="">
+                    <i class="bi bi-stickies-fill"></i>
+                    <span>Notas</span>
+                </a>
+            </li>
             @endif
 
 

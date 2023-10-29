@@ -11,17 +11,19 @@ class Estudiante extends Model
     use HasFactory;
     
     static $rules = [
+        'user_id' => 'required',
+        'curso_id' => 'required',
         'identificacion' => 'required',
         'telefono' => 'required',
         'direccion' => 'required',
-        'curso_id' => 'required',
     ];
 
     protected $fillable = [
+        'user_id',
+        'curso_id',
         'identificacion',
         'telefono' ,
         'direccion',
-        'curso_id' => 'required',
     ];
 
     public function user(){
