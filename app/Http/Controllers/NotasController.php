@@ -29,6 +29,7 @@ class NotasController extends Controller
             // $estudiantes = Estudiante::all();
             // $materias = Materias::all();
             return view('notas.index', compact('notas', 'estudiantes', 'materias'));
+
         }else if(Auth::user()->hasRole('ESTUDIANTE')){
 
             $estudiante = DB::table('estudiantes')
@@ -36,7 +37,10 @@ class NotasController extends Controller
             ->first();
             $notas = DB::table('notas')
             ->join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
-            ->where('notas.estudiante_id', '=', $estudiante->id)->get();
+            ->join('materias', 'notas.materia_id', '=', 'materias.id')
+            ->where('notas.estudiante_id', '=', $estudiante->id)
+            ->select('materias.nombre as materia', 'notas.*')
+            ->get();
             return view('notas.index', compact('notas'));
         }
 
