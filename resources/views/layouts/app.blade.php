@@ -50,17 +50,11 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <span class="d-none d-lg-block">GESTION NOTAS</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -76,40 +70,37 @@
                 <li class="nav-item dropdown pe-3">
 
                     @guest
-                        <!-- @if (Route::has('login'))
-                            <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @endif -->
-                    @else
-                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
-                            data-bs-toggle="dropdown">
-                            <span class="d-none d-md-block dropdown-toggle ps-2">
-                                {{ Auth::user()->name }}
-                            </span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link" href=""></a>
+                    </li>
+                @else
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">
+                            {{ Auth::user()->name }}
+                        </span>
+                    </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                            <li class="dropdown-header">
-                                <h6> {{ Auth::user()->name }}</h6>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6> {{ Auth::user()->name }}</h6>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                                    <i class="bi bi-box-arrow-right">
-                                    </i>
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    @endguest
+                                <i class="bi bi-box-arrow-right">
+                                </i>
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                @endguest
                 </li>
 
             </ul>
@@ -125,15 +116,14 @@
 
 
             @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('home') }}">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('home') }}">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-heading">Paginas</li>
+                <li class="nav-heading">Paginas</li>
 
 
                 <li class="nav-item">
@@ -173,19 +163,18 @@
                     </a>
                 </li>
             @elseif (Auth::user()->hasRole('PROFESOR'))
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('home') }}">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            <li class="nav-heading">Paginas</li>
-
-            
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{route('notas')}}">
+                    <a class="nav-link collapsed" href="{{ route('home') }}">
+                        <i class="bi bi-grid"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li><!-- End Dashboard Nav -->
+
+                <li class="nav-heading">Paginas</li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('notas') }}">
                         <i class="bi bi-stickies-fill"></i>
                         <span>Notas</span>
                     </a>
@@ -197,14 +186,13 @@
                         <span>Ranking</span>
                     </a>
                 </li>
-
             @elseif (Auth::user()->hasRole('ESTUDIANTE'))
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="{{route('notas')}}">
-                    <i class="bi bi-stickies-fill"></i>
-                    <span>Notas</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('notas') }}">
+                        <i class="bi bi-stickies-fill"></i>
+                        <span>Notas</span>
+                    </a>
+                </li>
             @endif
 
 

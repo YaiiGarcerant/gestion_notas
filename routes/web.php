@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,4 +204,15 @@ Route::get(
 )
     ->name('notas.destroy');
 
+
+/*
+|--------------------------------------------------------------------------
+| ROUTE RANKING
+|--------------------------------------------------------------------------
+*/
+
+Route::get(
+    'ranking',
+    [App\Http\Controllers\NotasController::class, 'indexRanking']
+)->name('ranking')->middleware('auth');
 
