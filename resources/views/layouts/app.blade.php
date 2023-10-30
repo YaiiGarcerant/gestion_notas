@@ -185,7 +185,7 @@
 
             @elseif (Auth::user()->hasRole('ESTUDIANTE'))
             <li class="nav-item">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link collapsed" href="{{route('notas')}}">
                     <i class="bi bi-stickies-fill"></i>
                     <span>Notas</span>
                 </a>

@@ -16,18 +16,30 @@ class NotasController extends Controller
 
     public function index()
     {
-        $notas = Notas::all();
-        $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
-        $estudiantes = DB::table('estudiantes')
-            ->join('users', 'estudiantes.user_id', '=', 'users.id')
-            ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
-            ->where('cursos.profesor_id', '=', $profesor->id)
-            ->select('users.name as estudiante', 'estudiantes.id')
-            ->get();
-        $materias = Materias::where('profesor_id', '=', $profesor->id)->select('materias.id')->get();
-        // $estudiantes = Estudiante::all();
-        // $materias = Materias::all();
-        return view('notas.index', compact('notas', 'estudiantes', 'materias'));
+        if(Auth::user()->hasRole('PROFESOR')){
+            $notas = Notas::all();
+            $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
+            $estudiantes = DB::table('estudiantes')
+                ->join('users', 'estudiantes.user_id', '=', 'users.id')
+                ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
+                ->where('cursos.profesor_id', '=', $profesor->id)
+                ->select('users.name as estudiante', 'estudiantes.id')
+                ->get();
+            $materias = Materias::where('profesor_id', '=', $profesor->id)->select('materias.id')->get();
+            // $estudiantes = Estudiante::all();
+            // $materias = Materias::all();
+            return view('notas.index', compact('notas', 'estudiantes', 'materias'));
+        }else if(Auth::user()->hasRole('ESTUDIANTE')){
+
+            $estudiante = DB::table('estudiantes')
+            ->where('user_id', '=', Auth::user()->id)
+            ->first();
+            $notas = DB::table('notas')
+            ->join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
+            ->where('notas.estudiante_id', '=', $estudiante->id)->get();
+            return view('notas.index', compact('notas'));
+        }
+
     }
 
 
