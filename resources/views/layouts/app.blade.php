@@ -122,6 +122,10 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
+
+
+            @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('home') }}">
                     <i class="bi bi-grid"></i>
@@ -131,7 +135,7 @@
 
             <li class="nav-heading">Paginas</li>
 
-            @if (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('programas') }}">
                         <i class="bi bi-bookmarks-fill"></i>
@@ -169,6 +173,17 @@
                     </a>
                 </li>
             @elseif (Auth::user()->hasRole('PROFESOR'))
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('home') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-heading">Paginas</li>
+
+            
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{route('notas')}}">
                         <i class="bi bi-stickies-fill"></i>
