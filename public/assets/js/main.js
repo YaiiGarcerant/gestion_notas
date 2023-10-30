@@ -70,6 +70,24 @@ const deleteEstudiante = (dato)=>{
 }
 
 
+
+const deleteNota = (dato)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/notas/destroy/${dato}`;
+    }
+  })
+}
+
+
+
+
+
 (function() {
   "use strict";
 

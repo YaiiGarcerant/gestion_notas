@@ -55,6 +55,8 @@ class ProfesorController extends Controller
                     'identificacion' => $request->identificacion,
                     'telefono' => $request->telefono,
                     'direccion' => $request->direccion,
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
 
                 $profesor = Profesor::where('identificacion', $request->identificacion)->first();
