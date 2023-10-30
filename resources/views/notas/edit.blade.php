@@ -13,18 +13,18 @@
                     <div class="container-fluid row g-3">
 
                         <small class="text-muted fw-semibold mt-4">
-                            Datos Del Estudiante  
+                            Datos Del Estudiante
                                 <hr style="margin-top: -10px; margin-left: 25%;">
                         </small>
 
                         @foreach ($materias as $materia)
                          <input type="hidden" name="materia_id" value="{{$materia->id}}">
                         @endforeach
-                      
+
                         <div class="col-12">
                             <label for="name" class="form-label fw-semibold">Estudiante: </label>
                             <select class="form-select border-2 shadow-sm" id="estudiante_id" name="estudiante_id" required>
-                                <option value="{{$nota->estudiante_id}}">{{$nota->estudiante->user->name}}</option>
+                                <option value="{{$nota->estudiante_id}}">{{$nota->estudiante}}</option>
                                 @foreach ($estudiantes as $estudiante)
                                     @if ($estudiante->id !== $nota->estudiante_id)
                                     <option value="{{ $estudiante->id }}">{{ $estudiante->estudiante}}</option>

@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Primera Nota</th> 
+                                <th>Primera Nota</th>
                                 <th>Segunda Nota</th>
                                 <th>Tercera Nota</th>
                                 <th>Funciones</th>
@@ -29,15 +29,15 @@
                         <tbody>
                             @foreach ($notas as $nota)
                             <tr>
-                                <td>{{ $nota->estudiante->user->name }}</td>
+                                <td>{{ $nota->estudiante }}</td>
                                 <td>{{ $nota->primera_nota}}</td>
-                                <td>{{ $nota->segunda_nota }}</td>
-                                <td>{{ $nota->tercera_nota}}</td>
+                                <td>{{ $nota->segunda_nota}}</td>
+                                <td>{{ $nota->tercera_nota }}</td>
                                 <td>
 
                                 <button type="button" class="btn btn-sm btn-warning fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $nota->id }}">Editar <i  class="bi bi-pencil-square"></i></button>
                                     <a type="button" class="btn btn-sm btn-danger fw-semibold shadow-sm" onclick="deleteNota('{{$nota->id}}')" >Eliminar <i class="bi bi-trash3"></i></button>
-                                </td>  
+                                </td>
                             </tr>
                             @include('notas.edit')
                         @endforeach
@@ -67,7 +67,7 @@
                         style="width:100%">
                         <thead>
                             <tr>
-                                <th>Primera Nota</th> 
+                                <th>Primera Nota</th>
                                 <th>Segunda Nota</th>
                                 <th>Tercera Nota</th>
                                 <th>Definitiva</th>
@@ -82,7 +82,7 @@
                                 <td>{{ $nota->tercera_nota}}</td>
                                 <td>{{ $nota->definitiva}}</td>
                                 <td>{{ $nota->observaciones}}</td>
- 
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -93,7 +93,7 @@
     </section>
 </main>
 @endif
-   
+
 
 @if ($message = Session::get('success'))
 <script>

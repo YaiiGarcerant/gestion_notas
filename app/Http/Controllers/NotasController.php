@@ -16,21 +16,27 @@ class NotasController extends Controller
     public function index()
     {
         if(Auth::user()->hasRole('PROFESOR')){
-
-            // $notas = Notas::all();
             //consultas el id del profesor usando el id del usuario
             $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
 
-            $estudiantes = DB::table('estudiantes')
-                ->join('users', 'estudiantes.user_id', '=', 'users.id')
-                ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
-                ->join('notas', 'estudiantes.id', '=', 'notas.estudiante_id')
-                ->where('cursos.profesor_id', '=', $profesor->id)
-                ->select('users.name as estudiante', 'estudiantes.id', 'notas.*')
-                ->get();
+            $notas =  DB::table('notas')
+            ->join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
+            ->join('users', 'estudiantes.user_id', '=', 'users.id')
+            ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
+            ->join('profesors', 'cursos.profesor_id', '=', 'profesors.id')
+            ->where('profesors.id', '=', $profesor->id)
+            ->select('notas.*', 'users.name as estudiante', 'estudiantes.id as estudiantes_id')
+            ->get();
+
+            $estudiantes  =  DB::table('estudiantes')
+            ->join('users', 'estudiantes.user_id', '=', 'users.id')
+            ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
+            ->where('cursos.profesor_id', '=', $profesor->id)
+            ->select('estudiantes.id', 'users.name as estudiante')
+            ->get();
 
             $materias = Materias::where('profesor_id', '=', $profesor->id)->select('materias.id')->get();
-            return view('notas.index', compact('estudiantes', 'materias'));
+            return view('notas.index', compact('estudiantes', 'materias', 'notas'));
 
         }else if(Auth::user()->hasRole('ESTUDIANTE')){
 
@@ -122,7 +128,7 @@ class NotasController extends Controller
     {
 
         if(Auth::user()->hasRole('ADMINISTRADOR GENERAL')){
-            // curso -> nombre -> puntuacion 
+            // curso -> nombre -> puntuacion
             $notas = DB::table('notas')
             ->join('estudiantes', 'notas.estudiantes_id', '=', 'estudiantes.id')
             ->join('')
@@ -131,9 +137,9 @@ class NotasController extends Controller
 
         }else{
 
-            // nombre -> puntuacion 
+            // nombre -> puntuacion
 
         }
-        
+
     }
 }
