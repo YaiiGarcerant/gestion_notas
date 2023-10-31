@@ -1,6 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (Auth::user()->hasRole('PROFESOR'))
+        <main class="container">
+            <section class="mt-4">
+                <article class="card rounded-4 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="card-title color fw-semibold">Estudiantes <i class="bi bi-mortarboard-fill"></i> </h4>
+
+                        <hr class="mt-4 mb-4">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered tabled-hover table-striped nowrap shadow-sm table-datatable"
+                                style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Identificacion</th>
+                                        <th>Correo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($estudiantes as $estudiante)
+                                        <tr>
+                                            <td>{{ $estudiante->estudiante }}</td>
+                                            <td>{{ $estudiante->identificacion }}</td>
+                                            <td>{{ $estudiante->correo }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    @else
     <main class="container">
         <section class="mt-4">
             <article class="card rounded-4 shadow-sm">
@@ -45,19 +80,19 @@
         @include('estudiante.create')
     </main>
 
-@if ($message = Session::get('success'))
-<script>
-    Swal.fire('Proceso finalizado correctamente!')
-</script>
-@elseif ($message = Session::get('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Error al registrar',
-        text: '{{$message}}',
-    });
-</script>
-@endif
+    @endif
 
-
+    @if ($message = Session::get('success'))
+        <script>
+            Swal.fire('Proceso finalizado correctamente!')
+        </script>
+    @elseif ($message = Session::get('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al registrar',
+                text: '{{ $message }}',
+            });
+        </script>
+    @endif
 @endsection

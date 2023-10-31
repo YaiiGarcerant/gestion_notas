@@ -19,8 +19,7 @@ class NotasController extends Controller
             //consultas el id del profesor usando el id del usuario
             $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
 
-            $notas =  DB::table('notas')
-            ->join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
+            $notas =  Notas::join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
             ->join('users', 'estudiantes.user_id', '=', 'users.id')
             ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
             ->join('profesors', 'cursos.profesor_id', '=', 'profesors.id')
@@ -59,9 +58,9 @@ class NotasController extends Controller
     {
         request()->validate(Notas::$rules);
 
-        // return response()->json($request);
+        //return response()->json($request);
 
-        $notaExist = Notas::where('estudiante_id', '=', $request->estudiante)->first();
+        $notaExist = Notas::where('estudiante_id', '=', $request->estudiante_id)->first();
 
         if (!$notaExist) {
             // Acceder a los valores numéricos
@@ -82,7 +81,6 @@ class NotasController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-
             return redirect()->route('notas')->with('success', 'Proceso Finalizado Exitosamente');
         } else {
             return redirect()->route('notas')->with('error', 'Este Estudiantes Esta Calificado');

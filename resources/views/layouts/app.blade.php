@@ -163,6 +163,9 @@
                     </a>
                 </li>
             @elseif (Auth::user()->hasRole('PROFESOR'))
+
+
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('home') }}">
                         <i class="bi bi-grid"></i>
@@ -171,6 +174,13 @@
                 </li><!-- End Dashboard Nav -->
 
                 <li class="nav-heading">Paginas</li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('estudiantes') }}">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <span>Estudiantes</span>
+                    </a>
+                </li>
 
 
                 <li class="nav-item">

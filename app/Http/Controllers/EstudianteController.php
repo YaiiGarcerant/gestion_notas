@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
-USE Illuminate\Support\Facades\DB;
-USE App\Models\Curso;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Curso;
 use App\Models\User;
 
 class EstudianteController extends Controller
@@ -13,9 +14,25 @@ class EstudianteController extends Controller
 
     public function index()
     {
-        $estudiantes = Estudiante::all();
-        $cursos = Curso::all();
-        return view('estudiante.index', compact('estudiantes', 'cursos'));
+        if (Auth::user()->hasRole('PROFESOR')) {
+            $profesor = DB::table('profesors')->where('user_id', '=', Auth::user()->id)->first();
+            // $estudiantes = Estudiante::all();
+            $estudiantes  =  DB::table('estudiantes')
+            ->join('users', 'estudiantes.user_id', '=', 'users.id')
+            ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
+            ->where('cursos.profesor_id', '=', $profesor->id)
+            ->select('estudiantes.id', 'users.name as estudiante', 'estudiantes.identificacion', 'users.email as correo')
+            ->get();
+            $cursos = Curso::all();
+            return view('estudiante.index', compact('estudiantes', 'cursos'));
+        }else{
+
+$estudiantes = Estudiante::all();
+$cursos = Curso::all();
+            return view('estudiante.index', compact('estudiantes', 'cursos'));
+        }
+
+
     }
     public function store(Request $request)
     {
@@ -59,9 +76,9 @@ class EstudianteController extends Controller
             }
         }else{
             return redirect()->route('estudiantes')->with('error', 'Este Estudiante Se Encuentra Registrado');
-        }   
+        }
 
-       
+
     }
 
 
