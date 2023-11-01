@@ -49,7 +49,11 @@ class NotasController extends Controller
             ->select('materias.nombre as materia', 'notas.*')
             ->get();
             return view('notas.index', compact('notas'));
+        }else{
+            $notas = Notas::all();
+            return view('notas.index', compact('notas'));
         }
+
 
     }
 
@@ -127,7 +131,11 @@ class NotasController extends Controller
 
         if(Auth::user()->hasRole('ADMINISTRADOR GENERAL')){
             // curso -> nombre -> puntuacion
-            $mejoresEstudiantesPorCurso = Notas::select('cursos.nombre as nombre_curso', DB::raw('MAX(notas.definitiva) as mejor_nota_definitiva'), DB::raw('GROUP_CONCAT(users.name) as nombre_alumno'))
+
+
+$mejoresEstudiantesPorCurso = Notas::select('cursos.nombre as nombre_curso',
+DB::raw('MAX(notas.definitiva) as mejor_nota_definitiva'),
+DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(users.name), ",", 1) as nombre_alumno'))
     ->join('estudiantes', 'notas.estudiante_id', '=', 'estudiantes.id')
     ->join('users', 'estudiantes.user_id', '=', 'users.id')
     ->join('cursos', 'estudiantes.curso_id', '=', 'cursos.id')
@@ -147,16 +155,6 @@ foreach ($mejoresEstudiantesPorCurso as $mejorEstudiante) {
         'mejor_nota_definitiva' => $mejorNotaDefinitiva,
     ];
 }
-
-foreach ($mejoresEstudiantes as $mejorEstudiante) {
-    $nombreCurso = $mejorEstudiante->nombre_curso;
-    $nombreAlumno = $mejorEstudiante->nombre_alumno;
-    $mejorNotaDefinitiva = $mejorEstudiante->mejor_nota_definitiva;
-
-}
-
-
-
         return view('ranking.index', compact('mejoresEstudiantes'));
 
 

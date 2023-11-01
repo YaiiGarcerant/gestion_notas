@@ -49,7 +49,7 @@
     </section>
     @include('notas.create')
 </main>
-@else
+@elseif (Auth::user()->hasRole('ESTUDIANTE'))
 <main class="container">
     <section class="mt-4">
         <article class="card rounded-4 shadow-sm">
@@ -92,6 +92,45 @@
         </article>
     </section>
 </main>
+@elseif (Auth::user()->hasRole('ADMINISTRADOR GENERAL'))
+<main class="container">
+    <section class="mt-4">
+        <article class="card rounded-4 shadow-sm">
+            <div class="card-body p-4">
+                <h4 class="card-title color fw-semibold">Notas - Promedios  <i class="bi bi-journals"></i> </h4>
+
+                <hr class="mt-4 mb-4">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered tabled-hover table-striped nowrap shadow-sm table-datatable"
+                        style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Nombre</th>
+                                <th>Primera Nota</th>
+                                <th>Segunda Nota</th>
+                                <th>Tercera Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($notas as $nota)
+                            <tr>
+                                <td>{{ $nota->estudiante->curso->nombre }}</td>
+                                <td>{{ $nota->estudiante->user->name }}</td>
+                                <td>{{ $nota->primera_nota}}</td>
+                                <td>{{ $nota->segunda_nota }}</td>
+                                <td>{{ $nota->tercera_nota}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+
 @endif
 
 
