@@ -164,10 +164,16 @@
                         <span>Estudiantes</span>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('ranking') }}">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                        <span>Ranking</span>
+                    </a>
+                </li>
+
+
             @elseif (Auth::user()->hasRole('PROFESOR'))
-
-
-
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('home') }}">
                         <i class="bi bi-grid"></i>
@@ -240,12 +246,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/index.js') }}"></script>
-
     <script src="{{ asset('assets/js/main.js') }}"></script>
-
-
-
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
 </body>
 
 </html>

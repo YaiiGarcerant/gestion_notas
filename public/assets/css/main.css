@@ -18,3 +18,7 @@
     margin-top: -10px;
     margin-left: 22%;
 }
+
+#name{
+ text-transform: uppercase;
+}

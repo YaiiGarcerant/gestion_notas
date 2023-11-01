@@ -31,42 +31,49 @@ class ProfesorController extends Controller
         ]);
 
         // return response()->json($request);
-    
+
 
         $materiaExist = Materias::where('nombre', $request->nombre)->first();
         if (!$materiaExist) {
             $userExist = Profesor::where('identificacion', $request->identificacion)->first();
             if (!$userExist) {
-                
-                $user = \App\Models\User::factory()->create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => bcrypt($request->identificacion),
-                ]);
+                $duplicate = User::where('email', $request->email)->first();
+                if (!$duplicate) {
+                    $name = mb_convert_case($request->name, MB_CASE_UPPER, "UTF-8");
 
-                $user->assignRole('PROFESOR');
+                    $user = \App\Models\User::factory()->create([
+                        'name' => $name,
+                        'email' => $request->email,
+                        'password' => bcrypt($request->identificacion),
+                    ]);
 
-                // $user = User::where('email', '=', $request->email)->first()->select('users.id');
-                
-                $user = DB::table('users')->where('users.email', '=', $request->email)->first();
+                    $user->assignRole('PROFESOR');
 
-                $profesor = Profesor::insert([
-                    'user_id' => $user->id,
-                    'identificacion' => $request->identificacion,
-                    'telefono' => $request->telefono,
-                    'direccion' => $request->direccion,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+                    // $user = User::where('email', '=', $request->email)->first()->select('users.id');
 
-                $profesor = Profesor::where('identificacion', $request->identificacion)->first();
+                    $user = DB::table('users')->where('users.email', '=', $request->email)->first();
 
-                $materia = Materias::create([
-                    'nombre' => $request->nombre,
-                    'profesor_id' => $profesor->id,
-                ]);
+                    $profesor = Profesor::insert([
+                        'user_id' => $user->id,
+                        'identificacion' => $request->identificacion,
+                        'telefono' => $request->telefono,
+                        'direccion' => $request->direccion,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
 
-                return redirect()->route('profesores')->with('success', 'Proceso Finalizado Exitosamente');
+                    $profesor = Profesor::where('identificacion', $request->identificacion)->first();
+
+                    $materia = Materias::create([
+                        'nombre' => $request->nombre,
+                        'profesor_id' => $profesor->id,
+                    ]);
+
+                    return redirect()->route('profesores')->with('success', 'Proceso Finalizado Exitosamente');
+                }else{
+                    return redirect()->route('profesores')->with('error', 'Email Registrado, Pruebe con otro.');
+
+                }
 
             }else{
 
