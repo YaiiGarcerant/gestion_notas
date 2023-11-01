@@ -40,6 +40,8 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
+
+
 </head>
 
 <body>
@@ -234,11 +236,14 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/quill/quill.min.js ') }}"></script>
 
 
     <!-- Template Main JS File -->
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
 </body>

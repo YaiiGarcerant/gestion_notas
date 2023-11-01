@@ -85,6 +85,18 @@ const deleteNota = (dato)=>{
 }
 
 
+const deleteMateria = (dato)=>{
+  Swal.fire({
+    icon: 'warning',
+    title: '¿Seguro que deseas realizar esta acción?',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      location.href =`/materias/destroy/${dato}`;
+    }
+  })
+}
 
 
 

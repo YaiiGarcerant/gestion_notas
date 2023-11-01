@@ -7,7 +7,7 @@
                         class="bi bi-person"></i> </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" class="needs-validation" action="{{ route('profesor.update', $profesor->user->id) }}" novalidate
+            <form id="formEdit{{$profesor->id}}" method="POST" class="needs-validation" action="{{ route('profesor.update', $profesor->user->id) }}" novalidate
                 role="form">
                 @csrf
                 <div class="modal-body">
@@ -26,7 +26,7 @@
 
                         <div class="col-md-6">
                             <label for="marca" class="form-label fw-semibold">Email: </label>
-                            <input type="email" class="form-control border-2 shadow-sm" name="email" id="email"
+                            <input type="email" class="form-control border-2 shadow-sm" name="email"
                               required value="{{$profesor->user->email}}">
                             @if ($errors->has('email'))
                                 <small class="text-danger fw-semibold">

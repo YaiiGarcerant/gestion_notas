@@ -5,11 +5,8 @@
         <section class="mt-4">
             <article class="card rounded-4 shadow-sm">
                 <div class="card-body p-4">
-                    <h4 class="card-title color fw-semibold">Programas</h4>
+                    <h4 class="card-title color fw-semibold">Materia - Asignatura  </h4>
 
-                    <button type="button" class="btn sahdow-sm btn-general btn-sm" data-bs-toggle="modal" data-bs-target="#createprogramas">
-                       Registrar <i class="bi bi-cursor"></i>
-                    </button>
 
                     <hr class="mt-4 mb-4">
 
@@ -18,20 +15,22 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
+                                    <th>Materia</th>
+                                    <th>Docente</th>
                                     <th>Funciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($programas as $programa)
+                                @foreach ($materias as $materia)
                                 <tr>
-                                    <td>{{ $programa->nombre }}</td>
+                                    <td>{{ $materia->nombre }}</td>
+                                    <td>{{$materia->profesor->user->name}}</td>
                                     <td>
-                                    <button type="button" class="btn btn-sm btn-warning fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $programa->id }}">Editar <i  class="bi bi-pencil-square"></i></button>
-                                        <a type="button" class="btn btn-sm btn-danger fw-semibold shadow-sm" onclick="deletePrograma('{{$programa->id}}')" >Eliminar <i class="bi bi-trash3"></i></button>
+                                    <button type="button" class="btn btn-sm btn-warning fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $materia->id }}">Editar <i  class="bi bi-pencil-square"></i></button>
+                                        <a type="button" class="btn btn-sm btn-danger fw-semibold shadow-sm" onclick="deleteMateria('{{$materia->id}}')" >Eliminar <i class="bi bi-trash3"></i></button>
                                     </td>
                                 </tr>
-                                @include('programa.edit')
+                                @include('materia.edit')
                             @endforeach
                             </tbody>
                         </table>
@@ -40,8 +39,6 @@
             </article>
         </section>
     </main>
-@include('programa.create')
-
 
 @if ($message = Session::get('success'))
 <script>

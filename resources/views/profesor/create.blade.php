@@ -1,4 +1,4 @@
-<div class="modal fade modal-lg" id="createProfesor" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade modal-lg" id="createProfesor" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -19,9 +19,8 @@
                         </small>
 
                         <div class="col-12">
-                            <label for="name" class="form-label fw-semibold">Nombre: </label>
-                            <input type="text" class="form-control border-2 shadow-sm" name="name" id="name"
-                                required>
+                            <label for="" class="form-label fw-semibold">Nombre: </label>
+                            <input name="name" id="name" type="text" class="form-control border-2 shadow-sm" required onkeyup="mayuscula(this)">
                             @if ($errors->has('name'))
                                 <small class="text-danger fw-semibold">
                                     <i class="bi bi-exclamation-circle"></i>
@@ -31,8 +30,7 @@
 
                         <div class="col-md-6">
                             <label for="marca" class="form-label fw-semibold">Email: </label>
-                            <input type="email" class="form-control border-2 shadow-sm" name="email" id="email"
-                              required>
+                            <input type="email" class="form-control border-2 shadow-sm"  id="email" name="email" required>
                             @if ($errors->has('email'))
                                 <small class="text-danger fw-semibold">
                                     <i class="bi bi-exclamation-circle"></i>
@@ -82,8 +80,7 @@
 
                         <div class="col-12 mb-4" style="margin-top: 10px">
                             <label for="modelo" class="form-label fw-semibold">Materia</label>
-                            <input type="text" class="form-control border-2 shadow-sm" name="nombre" id="nombre"
-                          required>
+                            <input type="text" class="form-control border-2 shadow-sm" name="nombre" id="nombre"  required>
                             @if ($errors->has('nombre'))
                                 <small class="text-danger fw-semibold">
                                     <i class="bi bi-exclamation-circle"></i>

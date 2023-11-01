@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Materias;
 use Illuminate\Http\Request;
 
+use App\Models\Profesor;
+use Illuminate\Support\Facades\DB;
+
 class MateriasController extends Controller
 {
     /**
@@ -12,54 +15,37 @@ class MateriasController extends Controller
      */
     public function index()
     {
-        //
+        $materias = Materias::all();
+        $profesores = Profesor::all();
+        return view('materia.index', compact('materias', 'profesores'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate(Materias::$rules);
+
+        $materiaExist = DB::table('materias')
+            ->where('profesor_id', $request->profesor_id)
+            ->where('id', '!=', $id)
+            ->exists();
+
+        if (!$materiaExist) {
+            $materia = Materias::where('id', $id)->update([
+                'nombre' => $request->nombre,
+                'profesor_id' => $request->profesor_id,
+            ]);
+            return redirect()->route('materias')->with('success', 'Proceso Finalizado Exitosamente');
+        } else {
+            return redirect()->route('profesores')->with('error', 'Este Docente Se Encuentra Registrado');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Materias $materias)
+    public function destroy($id)
     {
-        //
-    }
+        $materia = Materias::find($id)->delete();
+        return redirect()->route('materias')->with('success', 'Proceso Finalizado Exitosamente');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Materias $materias)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Materias $materias)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Materias $materias)
-    {
-        //
     }
 }
