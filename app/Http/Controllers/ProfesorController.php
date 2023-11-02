@@ -22,7 +22,7 @@ class ProfesorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:20',
             'email' => 'required',
             'identificacion' => 'required',
             'telefono' => 'required',

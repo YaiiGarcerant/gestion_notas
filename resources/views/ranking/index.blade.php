@@ -6,7 +6,7 @@
             <section class="mt-4">
                 <article class="card rounded-4 shadow-sm">
                     <div class="card-body p-4">
-                        <h4 class="card-title color fw-semibold text-center">Ranking</h4>
+                        <h4 class="card-title color fw-semibold text-center">Ranking Por Nota Definitiva <i class="bi bi-bar-chart"></i> </h4>
 
                         <hr class="mt-4 mb-4">
 

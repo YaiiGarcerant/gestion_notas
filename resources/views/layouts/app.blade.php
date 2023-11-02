@@ -95,7 +95,7 @@
                         document.getElementById('logout-form').submit();">
                                 <i class="bi bi-box-arrow-right">
                                 </i>
-                                {{ __('Logout') }}
+                                {{ __('Cerrar Sesion') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
@@ -204,13 +204,6 @@
                         <span>Notas</span>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="">
-                        <i class="bi bi-bar-chart-line-fill"></i>
-                        <span>Ranking</span>
-                    </a>
-                </li>
             @elseif (Auth::user()->hasRole('ESTUDIANTE'))
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="{{ route('notas') }}">
@@ -228,21 +221,7 @@
 
     <main id="main" class="main">
         @yield('content')
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            Designed by BootstrapMade
-        </div>
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    </main>
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>

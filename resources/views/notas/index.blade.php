@@ -24,6 +24,7 @@
                                         <th>Primera Nota</th>
                                         <th>Segunda Nota</th>
                                         <th>Tercera Nota</th>
+                                        <th>Definitiva</th>
                                         <th>Funciones</th>
                                     </tr>
                                 </thead>
@@ -34,6 +35,7 @@
                                             <td>{{ $nota->primera_nota }}</td>
                                             <td>{{ $nota->segunda_nota }}</td>
                                             <td>{{ $nota->tercera_nota }}</td>
+                                            <td>{{ $nota->definitiva }}</td>
                                             <td>
 
                                                 <button type="button" class="btn btn-sm btn-warning fw-semibold shadow-sm"
@@ -113,6 +115,7 @@
                                         <th>Primera Nota</th>
                                         <th>Segunda Nota</th>
                                         <th>Tercera Nota</th>
+                                        <th>Nota Definitiva</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,6 +126,7 @@
                                             <td>{{ $nota->primera_nota }}</td>
                                             <td>{{ $nota->segunda_nota }}</td>
                                             <td>{{ $nota->tercera_nota }}</td>
+                                            <td>{{ $nota->definitiva }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

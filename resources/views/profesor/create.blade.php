@@ -24,6 +24,7 @@
                             @if ($errors->has('name'))
                                 <small class="text-danger fw-semibold">
                                     <i class="bi bi-exclamation-circle"></i>
+                                    Ingrese el nombre completo
                                 </small>
                             @endif
                         </div>

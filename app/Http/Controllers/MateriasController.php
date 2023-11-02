@@ -37,7 +37,7 @@ class MateriasController extends Controller
             ]);
             return redirect()->route('materias')->with('success', 'Proceso Finalizado Exitosamente');
         } else {
-            return redirect()->route('profesores')->with('error', 'Este Docente Se Encuentra Registrado');
+            return redirect()->route('profesores')->with('error', 'Esta Materia Registrada');
         }
     }
 

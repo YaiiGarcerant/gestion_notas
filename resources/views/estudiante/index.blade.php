@@ -54,6 +54,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Correo</th>
+                                    <th>Identificacion</th>
                                     <th>Curso</th>
                                     <th>Funciones</th>
                                 </tr>
@@ -63,6 +64,7 @@
                                 <tr>
                                     <td>{{ $estudiante->user->name }}</td>
                                     <td>{{ $estudiante->user->email }}</td>
+                                    <td>{{ $estudiante->identificacion }}</td>
                                     <td>{{ $estudiante->curso->nombre}}</td>
                                     <td>
                                     <button type="button" class="btn btn-sm btn-warning fw-semibold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $estudiante->id }}">Editar <i  class="bi bi-pencil-square"></i></button>
